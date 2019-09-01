@@ -1,0 +1,199 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "example api",
+    "version": "1.0.0",
+    "title": "example api"
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "greet-reactive-controller",
+      "description": "Greet Reactive Controller"
+    },
+    {
+      "name": "person-controller",
+      "description": "Person Controller"
+    }
+  ],
+  "paths": {
+    "/greetings": {
+      "get": {
+        "tags": [
+          "greet-reactive-controller"
+        ],
+        "summary": "greetingPublisher",
+        "operationId": "greetingPublisherUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Greeting"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/greetings/events": {
+      "get": {
+        "tags": [
+          "greet-reactive-controller"
+        ],
+        "summary": "events",
+        "operationId": "eventsUsingGET",
+        "produces": [
+          "application/stream+json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Greeting"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/greetings/sse": {
+      "get": {
+        "tags": [
+          "greet-reactive-controller"
+        ],
+        "summary": "sseGreetings",
+        "operationId": "sseGreetingsUsingGET",
+        "produces": [
+          "text/event-stream"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Greeting"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/person/{id}": {
+      "get": {
+        "tags": [
+          "person-controller"
+        ],
+        "summary": "getPerson",
+        "operationId": "getPersonUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "delay",
+            "in": "query",
+            "description": "delay",
+            "required": false,
+            "type": "integer",
+            "default": 2,
+            "format": "int32"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Person"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "Flux«Greeting»": {
+      "type": "object",
+      "properties": {
+        "prefetch": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Flux«Greeting»"
+    },
+    "Greeting": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string"
+        }
+      },
+      "title": "Greeting"
+    },
+    "Person": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "title": "Person"
+    },
+    "Publisher«Greeting»": {
+      "type": "object",
+      "title": "Publisher«Greeting»"
+    }
+  }
+}
